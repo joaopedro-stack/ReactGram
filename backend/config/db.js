@@ -5,7 +5,7 @@ const dbPassword = process.env.DB_PASS;
 const conn = async () => {
     try {
         const dbConn = await mongoose.connect(
-            `mongodb+srv://joaopedro:${dbPassword}@cluster0.1ywedfi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+            `mongodb+srv://${dbUser}:${dbPassword}@cluster0.1ywedfi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
         )
 
         console.log("Conectou ao banco!")

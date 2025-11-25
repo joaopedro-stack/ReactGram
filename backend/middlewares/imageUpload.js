@@ -1,33 +1,32 @@
-const multer = require('multer')
-const path = require('path')
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../config/cloudinary");
 
-// destination
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: async (req, file) => {
+        let folder = "reactgram";
 
-const imageStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        let folder = "";
+        if (req.baseUrl.includes("users")) folder = "reactgram/users";
+        if (req.baseUrl.includes("photos")) folder = "reactgram/photos";
 
-        if (req.baseUrl.includes("users")) {
-            folder = "users"
-        } else if (req.baseUrl.includes("photos")) {
-            folder = "photos"
-        }
-
-        cb(null, `uploads/${folder}/`)
+        return {
+            folder,
+            allowed_formats: ["jpg", "png", "jpeg"],
+            resource_type: "image",
+            public_id: `${Date.now()}-${file.originalname}`,
+        };
     },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname))
-    }
-})
+});
 
 const imageUpload = multer({
-    storage: imageStorage,
+    storage,
     fileFilter(req, file, cb) {
         if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
-            return cb(new Error("Por favor, envie apenas png, jpg ou jpeg!"))
+            return cb(new Error("Envie somente png, jpg ou jpeg!"));
         }
-        cb(undefined, true)
-    }
-})
+        cb(null, true);
+    },
+});
 
-module.exports = { imageUpload }
+module.exports = { imageUpload };

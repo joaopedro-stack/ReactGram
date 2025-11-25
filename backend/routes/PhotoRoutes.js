@@ -10,22 +10,15 @@ const authGuard = require("../middlewares/authGuard")
 const validate = require('../middlewares/handleValidation')
 const {imageUpload} = require("../middlewares/imageUpload")
 
-// Routes
 router.post(
   "/",
   authGuard,
-  (req, res, next) => {
-    imageUpload.single("image")(req, res, (err) => {
-      if (err) {
-        return res.status(400).json({ errors: [err.message] });
-      }
-      next();
-    });
-  },
+  imageUpload.single("image"),
   photoInsertValidation(),
   validate,
   insertPhoto
 );
+
 router.delete("/:id" , authGuard, deletePhoto)
 router.get("/" , authGuard, getAllPhotos)
 router.get("/user/:id" , authGuard, getUserPhotos)
