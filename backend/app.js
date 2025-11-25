@@ -12,8 +12,7 @@ app.use(express.urlencoded({extended: true}));
 
 // Solve CORS   
 app.use(cors({
-  origin: ["http://localhost:3000", "https://reactgraam.netlify.app"],
-  credentials: true
+  origin: "*"
 }));
 
 //Upload directory
