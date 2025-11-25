@@ -1,7 +1,5 @@
 import './Photo.css'
 
-import { upload } from '../../utils/config'
-
 // components
 import Message from '../../components/Message'
 import { Link } from 'react-router-dom'
@@ -78,7 +76,7 @@ const Photo = () => {
               <div className="comment" key={comment.comment}>
                 <div className="author">
                   {comment.userImage && (
-                    <img src={`${upload}/users/${comment.userImage}`} alt={comment.userName} />
+                    <img src={comment.userImage} alt={comment.userName} />
                   )}
                   <Link to={`/users/${comment.userId}`}>
                     <p>{comment.userName}</p>

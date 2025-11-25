@@ -1,7 +1,5 @@
 import './Profile.css'
 
-import { upload } from '../../utils/config'
-
 // components
 import Message from '../../components/Message'
 import { Link } from 'react-router-dom'
@@ -127,7 +125,7 @@ const Profile = () => {
         <div id='profile'>
             <div className="profile-header">
                 {user.profileImage && (
-                    <img src={`${upload}/users/${user.profileImage}`} alt={user.name} />
+                    <img src={user.profileImage} alt={user.name} />
                 )}
                 <div className="profile-description">
                     {user.name && (
@@ -158,7 +156,7 @@ const Profile = () => {
                     <div className="edit-photo hide" ref={editPhotoForm}>
                         <p>Editando...</p>
                         {editImage && (
-                            <img src={`${upload}/photos/${editImage}`} alt={editTitle} />
+                            <img src={user.profileImage} alt={user.name} />
                         )}
                         <form onSubmit={handleUpdate}>
                             <input type="text" onChange={(e) => setEditTitle(e.target.value)} value={editTitle || ""} />
@@ -174,7 +172,7 @@ const Profile = () => {
                 {photos && photos.map((photo) => (
                     <div className="photo" key={photo._id}>
                         {photo.image && (
-                            <img src={`${upload}/photos/${photo.image}`} alt={photo.title} />
+                              <img src={photo.image} alt={photo.title} />
                         )}
                         {id === userAuth._id ? (
                             <div className="actions">
