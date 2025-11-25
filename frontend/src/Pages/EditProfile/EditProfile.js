@@ -1,7 +1,7 @@
 import "./EditProfile.css"
 // hooks
 
-import { useState, useEffect, use } from "react"
+import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
 // redux
