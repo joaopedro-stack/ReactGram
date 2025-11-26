@@ -14,7 +14,7 @@ const insertPhoto = async (req, res) => {
 
     const image = req.file.path;
 
-    console.log("ARQUIVO FINAL =>", req.file);
+    console.log("URL FINAL =>", req.file.path);
 
     const reqUser = req.user;
     const user = await User.findById(reqUser._id);

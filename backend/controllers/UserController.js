@@ -91,12 +91,13 @@ const getCurrentUser = async (req, res) => {
 
 // update an user
 
+// update an user
 const update = async (req, res) => {
     const { name, password, bio } = req.body;
 
     let profileImage = null;
     if (req.file) {
-        profileImage = req.file.filename;
+        profileImage = req.file.path;
     }
 
     const reqUser = req.user;
@@ -122,6 +123,7 @@ const update = async (req, res) => {
 
     res.status(200).json(user);
 };
+
 
 // get user by id
 
