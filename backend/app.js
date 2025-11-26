@@ -6,10 +6,6 @@ const cors = require("cors");
 const port = process.env.PORT;
 const app = express();
 
-// config JSON and form data response
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-
 // Solve CORS   
 app.use(cors({
   origin: "*"
@@ -17,11 +13,13 @@ app.use(cors({
 
 // DB connection
 require("./config/db.js");
-// routes
-const router = require("./routes/Router.js")
 
+const router = require("./routes/Router.js");
 app.use("/api", router);
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.listen(port, () => {
-    console.log(`Spp rodando na porta ${port}`)
-})
+  console.log(`Spp rodando na porta ${port}`)
+});
