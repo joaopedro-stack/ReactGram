@@ -3,26 +3,25 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("../config/cloudinary");
 
 const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    params: async (req, file) => {
-        console.log("REQ FILE =>", req.file);
-        console.log("REQ BODY =>", req.body);
+  cloudinary,
+  params: async (req, file) => {
+    
+    let folder = "reactgram";
 
-        let folder = "reactgram";
+    const url = req.baseUrl.toLowerCase();
 
-        const url = req.baseUrl.toLowerCase();
+    if (url.includes("users")) folder = "reactgram/users";
+    if (url.includes("photos")) folder = "reactgram/photos";
 
-        if (url.includes("/api/users")) folder = "reactgram/users";
-        if (url.includes("/api/photos")) folder = "reactgram/photos";
-
-        return {
-            folder,
-            allowed_formats: ["jpg", "png", "jpeg"],
-            resource_type: "image",
-            public_id: `${Date.now()}-${file.originalname}`,
-        };
-    },
+    return {
+      folder,
+      allowed_formats: ["jpg", "png", "jpeg"],
+      resource_type: "image",
+      public_id: `${Date.now()}-${file.originalname}`,
+    };
+  },
 });
+
 
 const imageUpload = multer({
     storage,
