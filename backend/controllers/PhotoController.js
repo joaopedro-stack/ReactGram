@@ -8,12 +8,12 @@ const insertPhoto = async (req, res) => {
   try {
     const { title } = req.body;
 
-    // Verifica se veio imagem
-    if (!req.file || !req.file.path) {
+    if (!req.file || !req.file.path && !req.file.secure_url) {
       return res.status(400).json({ errors: ["Nenhuma imagem enviada."] });
     }
 
-    const image = req.file.path;
+    const image = req.file.secure_url || req.file.path;
+
     console.log("ARQUIVO FINAL =>", req.file)
 
     const reqUser = req.user;
