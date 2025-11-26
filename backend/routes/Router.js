@@ -1,13 +1,11 @@
 const express = require("express");
-const router = express()
+const router = express.Router();
 
-router.use('/api/users' , require('./UserRoutes'))
-router.use("/api/photos" , require("./PhotoRoutes"))
+router.use('/users', require('./UserRoutes'));
+router.use('/photos', require('./PhotoRoutes'));
 
-// test route
-
-router.get("/", (req,res) => {
+router.get("/", (req, res) => {
     res.send("API Working!");
-})
+});
 
-module.exports = router
+module.exports = router;
