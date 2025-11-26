@@ -3,18 +3,18 @@ const User = require("../models/User");
 const mongoose = require("mongoose");
 const cloudinary = require("../config/cloudinary");
 
-// INSERT PHOTO
 const insertPhoto = async (req, res) => {
   try {
     const { title } = req.body;
 
-    if (!req.file || !req.file.path && !req.file.secure_url) {
+    // Correção: CloudinaryStorage retorna req.file.path
+    if (!req.file || !req.file.path) {
       return res.status(400).json({ errors: ["Nenhuma imagem enviada."] });
     }
 
-    const image = req.file.secure_url || req.file.path;
+    const image = req.file.path;
 
-    console.log("ARQUIVO FINAL =>", req.file)
+    console.log("ARQUIVO FINAL =>", req.file);
 
     const reqUser = req.user;
     const user = await User.findById(reqUser._id);
@@ -32,6 +32,7 @@ const insertPhoto = async (req, res) => {
     return res.status(500).json({ errors: ["Erro ao inserir foto."] });
   }
 };
+
 
 // DELETE PHOTO
 const deletePhoto = async (req, res) => {
