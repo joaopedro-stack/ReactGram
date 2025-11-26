@@ -5,10 +5,13 @@ const cloudinary = require("../config/cloudinary");
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: async (req, file) => {
+
         let folder = "reactgram";
 
-        if (req.baseUrl.includes("users")) folder = "reactgram/users";
-        if (req.baseUrl.includes("photos")) folder = "reactgram/photos";
+        const url = req.baseUrl.toLowerCase();
+
+        if (url.includes("/api/users")) folder = "reactgram/users";
+        if (url.includes("/api/photos")) folder = "reactgram/photos";
 
         return {
             folder,
