@@ -15,9 +15,6 @@ app.use(cors({
   origin: "*"
 }));
 
-//Upload directory
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
-
 // DB connection
 require("./config/db.js");
 // routes
