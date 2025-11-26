@@ -23,7 +23,7 @@ require("./config/db.js");
 // routes
 const router = require("./routes/Router.js")
 
-app.use(router)
+app.use("/api/users", router)
 
 app.listen(port, () => {
     console.log(`Spp rodando na porta ${port}`)
