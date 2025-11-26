@@ -3,9 +3,7 @@ const User = require("../models/User");
 const mongoose = require("mongoose");
 const cloudinary = require("../config/cloudinary");
 
-// =========================
 // INSERT PHOTO
-// =========================
 const insertPhoto = async (req, res) => {
   try {
     const { title } = req.body;
@@ -34,9 +32,7 @@ const insertPhoto = async (req, res) => {
   }
 };
 
-// =========================
 // DELETE PHOTO
-// =========================
 const deletePhoto = async (req, res) => {
   const { id } = req.params;
   const reqUser = req.user;
@@ -80,9 +76,7 @@ const deletePhoto = async (req, res) => {
   }
 };
 
-// =========================
 // GET ALL PHOTOS
-// =========================
 const getAllPhotos = async (req, res) => {
   const photos = await Photo.find({})
     .sort([["createdAt", -1]])
@@ -91,9 +85,7 @@ const getAllPhotos = async (req, res) => {
   return res.status(200).json(photos);
 };
 
-// =========================
 // GET USER PHOTOS
-// =========================
 const getUserPhotos = async (req, res) => {
   const { id } = req.params;
 
@@ -104,9 +96,7 @@ const getUserPhotos = async (req, res) => {
   return res.status(200).json(photos);
 };
 
-// =========================
 // GET PHOTO BY ID
-// =========================
 const getPhotoById = async (req, res) => {
   const { id } = req.params;
 
@@ -123,9 +113,7 @@ const getPhotoById = async (req, res) => {
   return res.status(200).json(photo);
 };
 
-// =========================
 // UPDATE PHOTO
-// =========================
 const updatePhoto = async (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
@@ -154,9 +142,7 @@ const updatePhoto = async (req, res) => {
   res.status(200).json({ photo, message: "Foto atualizada com sucesso!" });
 };
 
-// =========================
 // LIKE PHOTO
-// =========================
 const likePhoto = async (req, res) => {
   const { id } = req.params;
   const reqUser = req.user;
@@ -185,9 +171,7 @@ const likePhoto = async (req, res) => {
   });
 };
 
-// =========================
 // COMMENT PHOTO
-// =========================
 const commentPhoto = async (req, res) => {
   const { id } = req.params;
   const reqUser = req.user;
@@ -220,9 +204,7 @@ const commentPhoto = async (req, res) => {
   });
 };
 
-// =========================
 // SEARCH PHOTOS
-// =========================
 const searchPhotos = async (req, res) => {
   const { q } = req.query;
 
