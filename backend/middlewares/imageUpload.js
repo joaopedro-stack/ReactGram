@@ -5,6 +5,8 @@ const cloudinary = require("../config/cloudinary");
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: async (req, file) => {
+        console.log("REQ FILE =>", req.file);
+        console.log("REQ BODY =>", req.body);
 
         let folder = "reactgram";
 
@@ -25,6 +27,7 @@ const storage = new CloudinaryStorage({
 const imageUpload = multer({
     storage,
     fileFilter(req, file, cb) {
+        console.log("UPLOAD RECEBIDO =>", file);
         if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
             return cb(new Error("Envie somente png, jpg ou jpeg!"));
         }
